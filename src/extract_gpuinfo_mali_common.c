@@ -529,8 +529,10 @@ bool mali_common_parse_drm_fdinfo(struct gpu_info *info, FILE *fdinfo_file,
     }
   }
 
-  if (fid->engine_count)
-    SET_GPUINFO_PROCESS(process_info, gfx_engine_used, total_time);
+  if (fid->engine_count) {
+          SET_GPUINFO_PROCESS(process_info, gfx_engine_used, total_time);
+          info->static_info.engine_count = fid->engine_count;
+  }
 
   if (!client_id_set)
     return false;

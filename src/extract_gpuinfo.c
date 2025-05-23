@@ -337,6 +337,7 @@ void gpuinfo_refresh_utilisation_rate(struct gpu_info *gpu_info) {
 
   uint64_t gfx_total_process_cycles = 0;
   uint64_t total_delta = 0;
+  unsigned int ec = gpu_info->static_info.engine_count ? : 1;
   unsigned int utilisation_rate;
   uint64_t max_freq_hz;
   double avg_delta_secs;
@@ -353,7 +354,7 @@ void gpuinfo_refresh_utilisation_rate(struct gpu_info *gpu_info) {
 
   avg_delta_secs = ((double)total_delta / gpu_info->processes_count) / 1000000000.0;
   max_freq_hz = gpu_info->dynamic_info.gpu_clock_speed_max * 1000000;
-  utilisation_rate = (unsigned int)((((double)gfx_total_process_cycles) / (((double)max_freq_hz) * avg_delta_secs * 2)) * 100);
+  utilisation_rate = (unsigned int)((((double)gfx_total_process_cycles) / (((double)max_freq_hz) * avg_delta_secs * ec)) * 100);
   utilisation_rate = utilisation_rate > 100 ? 100 : utilisation_rate;
 
   SET_GPUINFO_DYNAMIC(&gpu_info->dynamic_info, gpu_util_rate, utilisation_rate);

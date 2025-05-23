@@ -74,6 +74,7 @@ struct gpuinfo_static_info {
   unsigned n_shared_cores;
   unsigned l2cache_size;
   unsigned n_exec_engines;
+  unsigned engine_count;
   bool integrated_graphics;
   bool encode_decode_shared;
   unsigned char valid[(gpuinfo_static_info_count + CHAR_BIT - 1) / CHAR_BIT];
